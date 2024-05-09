@@ -2,7 +2,8 @@
 
 - [x] Enable real time
 - [x] Send vote
-- [ ] Weak Auth (localStorage)
+- [x] Weak Auth (localStorage)
+- [ ] Multiplayer votes
 - [ ] Room entity
 - [ ] Join room
 - [ ] Kick from room

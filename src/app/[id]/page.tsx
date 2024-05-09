@@ -1,4 +1,5 @@
 import { Dummy } from "@/components/dummy";
+import { User } from "@/components/user";
 import { supabase } from "@/lib/supabase";
 import { useEffect } from "react";
 
@@ -14,7 +15,8 @@ export default async function Game({
     .single();
 
   return (
-    <div>
+    <div className="flex flex-col gap-4 p-4">
+      <User />
       <Dummy count={game.count} id={id} />
     </div>
   );
