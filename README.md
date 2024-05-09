@@ -3,8 +3,10 @@
 - [x] Enable real time
 - [x] Send vote
 - [x] Weak Auth (localStorage)
-- [ ] Multiplayer votes
-- [ ] Room entity
+- [x] Multiplayer votes
+- [x] Room entity
+- [ ] Organize db code
+- [ ] Create room
 - [ ] Join room
 - [ ] Kick from room
-- [ ] Auth
+- [ ] External Auth (?)

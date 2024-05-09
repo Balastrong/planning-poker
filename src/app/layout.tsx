@@ -13,8 +13,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        hey
-        {children}
+        <div className="p-4">
+          <h1 className="text-3xl">Planning Poker!</h1>
+        </div>
+        <div className="p-4">{children}</div>
       </body>
     </html>
   );
