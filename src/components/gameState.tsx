@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { supabase } from "@/lib/supabase";
+import { votesClient } from "@/db/votes";
 
-export const Dummy = ({ count, roomId }: { count: number; roomId: string }) => {
+export const GameState = ({ roomId }: { roomId: string }) => {
   const [state, setState] = useState<any[]>([]);
 
   useEffect(() => {
@@ -19,15 +20,11 @@ export const Dummy = ({ count, roomId }: { count: number; roomId: string }) => {
           filter: `room=eq.${roomId}`,
         },
         () => {
-          supabase
-            .from("votes")
-            .select()
-            .eq("room", roomId)
-            .then(({ data }) => {
-              if (!data) return;
+          votesClient.getRoomVotes(roomId).then(({ data }) => {
+            if (!data) return;
 
-              setState(data);
-            });
+            setState(data);
+          });
         }
       )
       .subscribe();
@@ -39,10 +36,7 @@ export const Dummy = ({ count, roomId }: { count: number; roomId: string }) => {
 
   const sendVote = async (vote: number) => {
     const user = JSON.parse(localStorage.getItem("user") || "{}")?.id;
-    await supabase
-      .from("votes")
-      .upsert({ vote, room: roomId, user })
-      .eq("id", roomId);
+    votesClient.castVote({ vote: vote.toString(), room: roomId, user });
   };
 
   return (

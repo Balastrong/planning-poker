@@ -1,12 +1,13 @@
 "use client";
 
+import { usersClient } from "@/db/users";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { supabase } from "@/lib/supabase";
+import { User } from "@/types/user";
 
-export const User = () => {
-  const [user, setUser] = useState({ username: "", id: "" });
+export const UserSelector = () => {
+  const [user, setUser] = useState<User>({ username: "", id: "" });
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -19,15 +20,11 @@ export const User = () => {
     const formData = new FormData(e.target as HTMLFormElement);
     const username = formData.get("username") as string;
 
-    supabase
-      .from("users")
-      .upsert({ username, id: user?.id })
-      .select()
-      .then(({ data }) => {
-        const user = data?.[0];
-        localStorage.setItem("user", JSON.stringify(user));
-        setUser(user);
-      });
+    usersClient.upsert({ username, id: user?.id }).then(({ data }) => {
+      const user = data?.[0];
+      localStorage.setItem("user", JSON.stringify(user));
+      setUser(user);
+    });
   };
 
   return (
