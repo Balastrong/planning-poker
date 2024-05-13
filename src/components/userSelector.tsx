@@ -1,11 +1,8 @@
 "use client";
 
-import { usersClient } from "@/db/users";
-import { useEffect, useState } from "react";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { User } from "@/types/user";
-import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 export const UserSelector = () => {
   const { currentUser, saveUser } = useCurrentUser();
@@ -24,7 +21,7 @@ export const UserSelector = () => {
       <div>User</div>
       <form className="flex gap-4" onSubmit={handleSaveUser}>
         <Input name="username" placeholder="Enter your name" />
-        <Button>Submit</Button>
+        <Button>Save</Button>
       </form>
       <div className="text-sm text-gray-500 mt-2">
         {currentUser?.id

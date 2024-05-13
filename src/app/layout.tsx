@@ -1,6 +1,8 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
 import { QueryContext } from "@/components/queryContext";
+import { UserSelector } from "@/components/userSelector";
+import { Inter } from "next/font/google";
+import Link from "next/link";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,11 +14,17 @@ export default function RootLayout({
   return (
     <QueryContext>
       <html lang="en">
-        <body className={inter.className}>
-          <div className="p-4">
-            <h1 className="text-3xl">Planning Poker!</h1>
+        <head>
+          <title>Planning Poker!</title>
+        </head>
+        <body className={inter.className + " flex flex-col gap-4 p-4"}>
+          <div>
+            <Link href="/">
+              <h1 className="text-3xl">Planning Poker!</h1>
+            </Link>
           </div>
-          <div className="p-4">{children}</div>
+          <UserSelector />
+          <div>{children}</div>
         </body>
       </html>
     </QueryContext>

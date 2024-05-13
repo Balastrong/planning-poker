@@ -3,10 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 // Throw away when proper auth is implemented
-const getUserId = () => {
-  console.log("getUserId");
-  return localStorage.getItem("userId") || undefined;
-};
+const getUserId = () => localStorage.getItem("userId") || undefined;
 const persistUserId = (userId: string) =>
   localStorage.setItem("userId", userId);
 

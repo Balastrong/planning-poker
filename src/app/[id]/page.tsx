@@ -1,15 +1,13 @@
-import { GameState } from "@/components/gameState";
-import { UserSelector } from "@/components/user";
+import { Game } from "@/components/game";
 
-export default async function Game({
+export default async function GamePage({
   params: { id },
 }: {
   params: { id: string };
 }) {
   return (
-    <div className="flex flex-col gap-4 p-4">
-      <UserSelector />
-      <GameState roomId={id} />
+    <div className="flex flex-col gap-4">
+      <Game roomId={id} />
     </div>
   );
 }
