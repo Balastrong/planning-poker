@@ -6,10 +6,11 @@ import { supabase } from "@/lib/supabase";
 import { useCallback, useEffect, useState } from "react";
 import { GameControls } from "./gameControls";
 import { GameState } from "./gameState";
+import { Tables } from "@/types/database.gen";
 
 export const Game = ({ roomId }: { roomId: string }) => {
   const { currentUser } = useCurrentUser();
-  const [state, setState] = useState<any[]>([]);
+  const [state, setState] = useState<Tables<"votes">[]>([]);
 
   const getVotes = useCallback(() => {
     votesClient.getRoomVotes(roomId).then(({ data }) => {
@@ -44,6 +45,8 @@ export const Game = ({ roomId }: { roomId: string }) => {
   }, [getVotes, roomId]);
 
   const sendVote = async (vote: string) => {
+    if (!currentUser) return;
+
     votesClient.castVote({
       vote: vote.toString(),
       room: roomId,
