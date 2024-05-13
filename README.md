@@ -7,12 +7,12 @@
 - [x] Room entity
 - [x] Organize db code
 - [x] User management
-- [ ] Users in room
+- [x] Users in room
+- [x] Reset game (votes to undefined)
+- [ ] Game mode (hidden/show)
+- [ ] Create room
 - [ ] Join room
 - [ ] Kick from room
-- [ ] Create room
 - [ ] Room list home
-- [ ] Game mode (hidden/show)
-- [ ] Reset game (votes to undefined)
 - [ ] Custom cards
 - [ ] External Auth (?)

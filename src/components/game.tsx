@@ -1,16 +1,15 @@
 "use client";
 
-import { votesClient } from "@/db/votes";
+import { GameVote, votesClient } from "@/db/votes";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { supabase } from "@/lib/supabase";
 import { useCallback, useEffect, useState } from "react";
 import { GameControls } from "./gameControls";
 import { GameState } from "./gameState";
-import { Tables } from "@/types/database.gen";
 
 export const Game = ({ roomId }: { roomId: string }) => {
   const { currentUser } = useCurrentUser();
-  const [state, setState] = useState<Tables<"votes">[]>([]);
+  const [state, setState] = useState<GameVote[]>([]);
 
   const getVotes = useCallback(() => {
     votesClient.getRoomVotes(roomId).then(({ data }) => {
@@ -54,10 +53,20 @@ export const Game = ({ roomId }: { roomId: string }) => {
     });
   };
 
+  const resetGame = async () => {
+    if (!currentUser) return;
+
+    votesClient.resetVotes(roomId);
+  };
+
   return (
-    <div>
-      <GameControls onCastVote={sendVote} disableButtons={!currentUser?.id} />
-      <GameState state={state} />
+    <div className="flex flex-col gap-4">
+      <GameControls
+        onCastVote={sendVote}
+        onReset={resetGame}
+        disableButtons={!currentUser?.id}
+      />
+      <GameState votes={state} />
     </div>
   );
 };

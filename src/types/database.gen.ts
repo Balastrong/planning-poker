@@ -54,21 +54,21 @@ export type Database = {
           id: number
           room: string
           user: string
-          vote: string
+          vote: string | null
         }
         Insert: {
           created_at?: string
           id?: number
           room: string
           user: string
-          vote: string
+          vote?: string | null
         }
         Update: {
           created_at?: string
           id?: number
           room?: string
           user?: string
-          vote?: string
+          vote?: string | null
         }
         Relationships: [
           {
