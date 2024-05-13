@@ -1,17 +1,21 @@
-import { Tables } from "@/types/database.gen";
-import { VoteCard } from "./voteCard";
-import { GameVote } from "@/db/votes";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { VoteCard } from "./voteCard";
+import { GameState } from "@/db/rooms";
 
-export const GameState = ({ votes }: { votes: GameVote[] }) => {
+export const GameStateDisplay = ({
+  gameState,
+}: {
+  gameState: GameState | undefined;
+}) => {
   const { currentUser } = useCurrentUser();
 
   return (
     <div className="flex gap-4">
-      {votes.map((vote) => (
+      {gameState?.votes.map((vote) => (
         <VoteCard
           key={vote.id}
           vote={vote}
+          showVotes={gameState.showVotes || false}
           isCurrent={currentUser?.id === vote.users?.id}
         />
       ))}

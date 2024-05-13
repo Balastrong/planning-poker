@@ -15,18 +15,21 @@ export type Database = {
           created_at: string
           id: string
           name: string | null
+          showVotes: boolean
         }
         Insert: {
           count: number
           created_at?: string
           id?: string
           name?: string | null
+          showVotes?: boolean
         }
         Update: {
           count?: number
           created_at?: string
           id?: string
           name?: string | null
+          showVotes?: boolean
         }
         Relationships: []
       }

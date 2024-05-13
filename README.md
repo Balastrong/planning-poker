@@ -9,10 +9,11 @@
 - [x] User management
 - [x] Users in room
 - [x] Reset game (votes to undefined)
-- [ ] Game mode (hidden/show)
+- [x] Game mode (hidden/show)
+- [x] Room list home
 - [ ] Create room
 - [ ] Join room
 - [ ] Kick from room
-- [ ] Room list home
-- [ ] Custom cards
+- [ ] Decent UI already?
+- [ ] Custom cards (fibonacci, t-shirt, etc)
 - [ ] External Auth (?)

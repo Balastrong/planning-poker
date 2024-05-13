@@ -5,23 +5,13 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { supabase } from "@/lib/supabase";
 import { useCallback, useEffect, useState } from "react";
 import { GameControls } from "./gameControls";
-import { GameState } from "./gameState";
+import { GameStateDisplay } from "./gameState";
+import { useGameState } from "@/hooks/useGameState";
 
 export const Game = ({ roomId }: { roomId: string }) => {
   const { currentUser } = useCurrentUser();
-  const [state, setState] = useState<GameVote[]>([]);
-
-  const getVotes = useCallback(() => {
-    votesClient.getRoomVotes(roomId).then(({ data }) => {
-      if (!data) return;
-
-      setState(data);
-    });
-  }, [roomId]);
-
-  useEffect(() => {
-    getVotes();
-  }, [getVotes]);
+  const { gameState, refetchGameState, sendVote, resetGame, showVotes } =
+    useGameState(roomId, currentUser?.id);
 
   useEffect(() => {
     const channel = supabase
@@ -34,39 +24,24 @@ export const Game = ({ roomId }: { roomId: string }) => {
           table: "votes",
           filter: `room=eq.${roomId}`,
         },
-        getVotes
+        () => refetchGameState()
       )
       .subscribe();
 
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [getVotes, roomId]);
-
-  const sendVote = async (vote: string) => {
-    if (!currentUser) return;
-
-    votesClient.castVote({
-      vote: vote.toString(),
-      room: roomId,
-      user: currentUser.id,
-    });
-  };
-
-  const resetGame = async () => {
-    if (!currentUser) return;
-
-    votesClient.resetVotes(roomId);
-  };
+  }, [refetchGameState, roomId]);
 
   return (
     <div className="flex flex-col gap-4">
       <GameControls
         onCastVote={sendVote}
         onReset={resetGame}
-        disableButtons={!currentUser?.id}
+        onShowVotes={showVotes}
+        disableButtons={!currentUser?.id || gameState?.showVotes || false}
       />
-      <GameState votes={state} />
+      <GameStateDisplay gameState={gameState} />
     </div>
   );
 };

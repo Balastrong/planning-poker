@@ -6,10 +6,12 @@ export const GameControls = ({
   disableButtons,
   onCastVote,
   onReset,
+  onShowVotes,
 }: {
   disableButtons: boolean;
   onCastVote: (vote: string) => any;
   onReset: () => any;
+  onShowVotes: () => any;
 }) => {
   return (
     <div className="flex flex-col gap-4">
@@ -24,8 +26,9 @@ export const GameControls = ({
           </Button>
         ))}
       </div>
-      <div>
+      <div className="flex gap-2">
         <Button onClick={onReset}>Reset</Button>
+        <Button onClick={onShowVotes}>Show Votes</Button>
       </div>
     </div>
   );

@@ -9,13 +9,7 @@ const castVote = async (payload: {
 const getRoomVotes = async (room: string) =>
   supabase
     .from("votes")
-    .select(
-      `
-  id,
-  vote,
-  users (id, username) 
-`
-    )
+    .select("id, vote, users (id, username)")
     .eq("room", room);
 
 export type GameVote = NonNullable<
