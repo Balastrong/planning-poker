@@ -6,7 +6,7 @@
 - [x] Multiplayer votes
 - [x] Room entity
 - [x] Organize db code
-- [ ] User management
+- [x] User management
 - [ ] Users in room
 - [ ] Join room
 - [ ] Kick from room
