@@ -6,10 +6,12 @@
 - [x] Multiplayer votes
 - [x] Room entity
 - [x] Organize db code
+- [ ] User management
 - [ ] Users in room
 - [ ] Join room
 - [ ] Kick from room
 - [ ] Create room
+- [ ] Room list home
 - [ ] Game mode (hidden/show)
 - [ ] Reset game (votes to undefined)
 - [ ] Custom cards

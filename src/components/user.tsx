@@ -20,7 +20,7 @@ export const UserSelector = () => {
     const formData = new FormData(e.target as HTMLFormElement);
     const username = formData.get("username") as string;
 
-    usersClient.upsert({ username, id: user?.id }).then(({ data }) => {
+    usersClient.guestSignIn({ username, id: user?.id }).then(({ data }) => {
       const user = data?.[0];
       localStorage.setItem("user", JSON.stringify(user));
       setUser(user);
