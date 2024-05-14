@@ -1,12 +1,11 @@
 "use client";
 
-import { GameVote, votesClient } from "@/db/votes";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useGameState } from "@/hooks/useGameState";
 import { supabase } from "@/lib/supabase";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { GameControls } from "./gameControls";
 import { GameStateDisplay } from "./gameState";
-import { useGameState } from "@/hooks/useGameState";
 
 export const Game = ({ roomId }: { roomId: string }) => {
   const { currentUser } = useCurrentUser();
@@ -24,7 +23,7 @@ export const Game = ({ roomId }: { roomId: string }) => {
           table: "votes",
           filter: `room=eq.${roomId}`,
         },
-        () => refetchGameState()
+        () => refetchGameState(),
       )
       .subscribe();
 

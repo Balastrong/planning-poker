@@ -2,20 +2,22 @@
 
 import { Button } from "./ui/button";
 
+type Props = {
+  disableButtons: boolean;
+  onCastVote: (vote: string) => void;
+  onReset: () => void;
+  onShowVotes: () => void;
+};
+
 export const GameControls = ({
   disableButtons,
   onCastVote,
   onReset,
   onShowVotes,
-}: {
-  disableButtons: boolean;
-  onCastVote: (vote: string) => any;
-  onReset: () => any;
-  onShowVotes: () => any;
-}) => {
+}: Props) => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         {["0", "1", "2", "3", "5", "8", "13"].map((vote) => (
           <Button
             key={vote}

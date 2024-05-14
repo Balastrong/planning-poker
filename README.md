@@ -11,6 +11,7 @@
 - [x] Reset game (votes to undefined)
 - [x] Game mode (hidden/show)
 - [x] Room list home
+- [x] Lint, prettier, tailwind formatting & co
 - [ ] Create room
 - [ ] Join room
 - [ ] Kick from room

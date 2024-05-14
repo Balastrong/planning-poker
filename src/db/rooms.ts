@@ -16,7 +16,7 @@ const getState = async (room: string) =>
   name,
   showVotes,
   votes (id, vote, users (id, username))
-`
+`,
     )
     .eq("id", room)
     .order("created_at", { referencedTable: "votes", ascending: true })

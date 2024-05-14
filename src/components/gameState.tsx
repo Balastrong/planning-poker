@@ -1,6 +1,6 @@
+import { GameState } from "@/db/rooms";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { VoteCard } from "./voteCard";
-import { GameState } from "@/db/rooms";
 
 export const GameStateDisplay = ({
   gameState,

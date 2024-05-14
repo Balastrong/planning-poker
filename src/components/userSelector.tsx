@@ -23,7 +23,7 @@ export const UserSelector = () => {
         <Input name="username" placeholder="Enter your name" />
         <Button>Save</Button>
       </form>
-      <div className="text-sm text-gray-500 mt-2">
+      <div className="mt-2 text-sm text-gray-500">
         {currentUser?.id
           ? `Logged in as ${currentUser?.username}`
           : "Please enter your name"}

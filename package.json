@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,json,css,scss,md}'",
     "supabase-types-gen": "supabase gen types typescript --project-id wonyknslyniyuomcznqk > src/types/database.gen.ts"
   },
   "dependencies": {
@@ -26,9 +27,12 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^7.9.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "postcss": "^8",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.14",
     "supabase": "^1.165.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

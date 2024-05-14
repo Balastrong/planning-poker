@@ -8,7 +8,7 @@ import Link from "next/link";
 export const RoomsList = () => {
   const { currentUser } = useCurrentUser();
   const { data } = useQuery({
-    queryFn: () => roomsClient.getJoinedRooms(currentUser?.id!),
+    queryFn: () => roomsClient.getJoinedRooms(currentUser!.id),
     queryKey: ["rooms"],
     enabled: !!currentUser,
     select: ({ data }) =>
