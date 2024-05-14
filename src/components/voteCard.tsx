@@ -1,14 +1,17 @@
 import { GameVote } from "@/db/votes";
 import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
 
 export const VoteCard = ({
   vote,
   isCurrent,
   showVotes,
+  onLeave,
 }: {
   vote: GameVote;
   isCurrent: boolean;
   showVotes: boolean;
+  onLeave: () => void;
 }) => {
   return (
     <div className="flex flex-col items-center gap-2">
@@ -18,6 +21,7 @@ export const VoteCard = ({
       <span className={cn(isCurrent && "font-bold")}>
         {vote.users?.username}
       </span>
+      <X onClick={onLeave} className="cursor-pointer text-destructive" />
     </div>
   );
 };

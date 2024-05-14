@@ -31,9 +31,17 @@ const toggleVotesVisibility = async (room: string, showVotes: boolean) =>
 const createRoom = async (name: string) =>
   supabase.from("rooms").insert({ name }).select("id").single();
 
+const joinRoom = async (roomId: string, userId: string) =>
+  supabase.from("votes").upsert({ room: roomId, user: userId });
+
+const leaveRoom = async (roomId: string, userId: string) =>
+  supabase.from("votes").delete().eq("room", roomId).eq("user", userId);
+
 export const roomsClient = {
   getJoinedRooms,
   getState,
   toggleVotesVisibility,
   createRoom,
+  joinRoom,
+  leaveRoom,
 };

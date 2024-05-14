@@ -13,8 +13,10 @@
 - [x] Room list home
 - [x] Lint, prettier, tailwind formatting & co
 - [x] Create room
-- [ ] Join room
-- [ ] Kick from room
+- [x] Join room
+- [x] Kick/Leave from room
 - [ ] Decent UI already?
 - [ ] Custom cards (fibonacci, t-shirt, etc)
 - [ ] External Auth (?)
+- [ ] Refactor db interaction/encapsulation
+- [ ] Improve gamestate update

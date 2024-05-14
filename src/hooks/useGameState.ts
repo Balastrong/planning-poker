@@ -32,8 +32,13 @@ export const useGameState = (roomId: string, userId: string | undefined) => {
     await roomsClient.toggleVotesVisibility(roomId, true);
     refetchGameState();
   };
+
   const hideVotes = async () =>
     roomsClient.toggleVotesVisibility(roomId, false);
+
+  const leaveRoom = async (userId: string) => {
+    await roomsClient.leaveRoom(roomId, userId);
+  };
 
   return {
     gameState,
@@ -42,5 +47,6 @@ export const useGameState = (roomId: string, userId: string | undefined) => {
     resetGame,
     showVotes,
     hideVotes,
+    leaveRoom,
   };
 };

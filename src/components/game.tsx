@@ -9,8 +9,14 @@ import { GameStateDisplay } from "./gameState";
 
 export const Game = ({ roomId }: { roomId: string }) => {
   const { currentUser } = useCurrentUser();
-  const { gameState, refetchGameState, sendVote, resetGame, showVotes } =
-    useGameState(roomId, currentUser?.id);
+  const {
+    gameState,
+    refetchGameState,
+    sendVote,
+    resetGame,
+    showVotes,
+    leaveRoom,
+  } = useGameState(roomId, currentUser?.id);
 
   useEffect(() => {
     const channel = supabase
@@ -18,7 +24,7 @@ export const Game = ({ roomId }: { roomId: string }) => {
       .on(
         "postgres_changes",
         {
-          event: "UPDATE",
+          event: "*",
           schema: "public",
           table: "votes",
           filter: `room=eq.${roomId}`,
@@ -34,13 +40,14 @@ export const Game = ({ roomId }: { roomId: string }) => {
 
   return (
     <div className="flex flex-col gap-4">
+      <h1 className="text-2xl font-bold">Room: {gameState?.name}</h1>
       <GameControls
         onCastVote={sendVote}
         onReset={resetGame}
         onShowVotes={showVotes}
         disableVotes={!currentUser?.id || gameState?.showVotes || false}
       />
-      <GameStateDisplay gameState={gameState} />
+      <GameStateDisplay gameState={gameState} onLeave={leaveRoom} />
     </div>
   );
 };
