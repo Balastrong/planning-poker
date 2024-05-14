@@ -38,7 +38,7 @@ export const Game = ({ roomId }: { roomId: string }) => {
         onCastVote={sendVote}
         onReset={resetGame}
         onShowVotes={showVotes}
-        disableButtons={!currentUser?.id || gameState?.showVotes || false}
+        disableVotes={!currentUser?.id || gameState?.showVotes || false}
       />
       <GameStateDisplay gameState={gameState} />
     </div>

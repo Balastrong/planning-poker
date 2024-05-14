@@ -6,8 +6,8 @@ export default async function GamePage({
   params: { id: string };
 }) {
   return (
-    <div className="flex flex-col gap-4">
+    <main className="flex flex-col gap-4">
       <Game roomId={id} />
-    </div>
+    </main>
   );
 }

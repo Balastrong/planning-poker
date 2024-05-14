@@ -3,14 +3,14 @@
 import { Button } from "./ui/button";
 
 type Props = {
-  disableButtons: boolean;
+  disableVotes: boolean;
   onCastVote: (vote: string) => void;
   onReset: () => void;
   onShowVotes: () => void;
 };
 
 export const GameControls = ({
-  disableButtons,
+  disableVotes,
   onCastVote,
   onReset,
   onShowVotes,
@@ -22,7 +22,7 @@ export const GameControls = ({
           <Button
             key={vote}
             onClick={() => onCastVote(vote)}
-            disabled={disableButtons}
+            disabled={disableVotes}
           >
             {vote}
           </Button>
@@ -30,7 +30,9 @@ export const GameControls = ({
       </div>
       <div className="flex gap-2">
         <Button onClick={onReset}>Reset</Button>
-        <Button onClick={onShowVotes}>Show Votes</Button>
+        <Button onClick={onShowVotes} disabled={disableVotes}>
+          Show Votes
+        </Button>
       </div>
     </div>
   );

@@ -28,8 +28,12 @@ export type GameState = QueryData<ReturnType<typeof getState>>;
 const toggleVotesVisibility = async (room: string, showVotes: boolean) =>
   supabase.from("rooms").update({ showVotes }).eq("id", room);
 
+const createRoom = async (name: string) =>
+  supabase.from("rooms").insert({ name }).select("id").single();
+
 export const roomsClient = {
   getJoinedRooms,
   getState,
   toggleVotesVisibility,
+  createRoom,
 };

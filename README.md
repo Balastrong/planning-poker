@@ -12,7 +12,7 @@
 - [x] Game mode (hidden/show)
 - [x] Room list home
 - [x] Lint, prettier, tailwind formatting & co
-- [ ] Create room
+- [x] Create room
 - [ ] Join room
 - [ ] Kick from room
 - [ ] Decent UI already?

@@ -16,15 +16,20 @@ export const RoomsList = () => {
   });
 
   return (
-    <>
+    <div>
       <h2 className="text-2xl">Rooms</h2>
-      {data?.map((room) => (
-        <div key={room!.id}>
-          <Link className="underline hover:no-underline" href={`/${room!.id}`}>
-            {room!.name}
-          </Link>
-        </div>
-      ))}
-    </>
+      <div>
+        {data?.map((room) => (
+          <div key={room!.id}>
+            <Link
+              className="underline hover:no-underline"
+              href={`/${room!.id}`}
+            >
+              {room!.name}
+            </Link>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };

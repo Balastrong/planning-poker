@@ -11,21 +11,18 @@ export type Database = {
     Tables: {
       rooms: {
         Row: {
-          count: number;
           created_at: string;
           id: string;
           name: string | null;
           showVotes: boolean;
         };
         Insert: {
-          count: number;
           created_at?: string;
           id?: string;
           name?: string | null;
           showVotes?: boolean;
         };
         Update: {
-          count?: number;
           created_at?: string;
           id?: string;
           name?: string | null;
