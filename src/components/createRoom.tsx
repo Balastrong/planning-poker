@@ -1,12 +1,15 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { roomsClient } from "@/db/rooms";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useRouter } from "next/navigation";
 
 export const CreateRoom = () => {
   const router = useRouter();
+  const { isAuthenticated } = useCurrentUser();
 
   const handleCreateRoom = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,12 +22,12 @@ export const CreateRoom = () => {
   };
 
   return (
-    <div className="max-w-96">
-      <div>Create Room</div>
-      <form className="flex gap-4" onSubmit={handleCreateRoom}>
-        <Input name="roomName" placeholder="Enter the room's name" />
-        <Button>Create</Button>
-      </form>
-    </div>
+    <form className="flex flex-col gap-2" onSubmit={handleCreateRoom}>
+      <Label htmlFor="roomName">Room name</Label>
+      <Input id="roomName" name="roomName" />
+      <Button type="submit" variant={"default"} disabled={!isAuthenticated}>
+        Create room
+      </Button>
+    </form>
   );
 };

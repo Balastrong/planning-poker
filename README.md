@@ -17,6 +17,8 @@
 - [x] Kick/Leave from room
 - [x] Supabase Anon Auth
 - [x] Edit username
+- [x] Create new page
+- [ ] Landing page
 - [ ] Decent UI already?
 - [ ] Custom cards (fibonacci, t-shirt, etc)
 - [ ] External Auth (?)

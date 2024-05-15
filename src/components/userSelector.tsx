@@ -18,10 +18,10 @@ export const UserSelector = () => {
   };
 
   return (
-    <div className="p-2">
+    <div>
       <form className="flex items-center gap-2" onSubmit={handleSaveUser}>
         <Input name="username" placeholder="Enter your name" />
-        <Button size={"sm"}>{isAuthenticated ? "Rename" : "Sign up"}</Button>
+        <Button>{isAuthenticated ? "Rename" : "Sign up"}</Button>
       </form>
     </div>
   );

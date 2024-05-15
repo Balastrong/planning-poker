@@ -13,16 +13,18 @@ import { UserRound } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { UserSelector } from "./userSelector";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
   const { isAuthenticated, currentUser, logOut } = useCurrentUser();
+  const router = useRouter();
 
   return (
     <header className="flex items-center justify-between">
       <Link href="/">
         <h1 className="text-3xl font-semibold">Planning Poker 🃏</h1>
       </Link>
-      <div>
+      <div className="flex gap-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="flex gap-2 px-2">
@@ -33,7 +35,9 @@ export const Header = () => {
           <DropdownMenuContent>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <UserSelector />
+            <div className="p-2">
+              <UserSelector />
+            </div>
             {isAuthenticated && (
               <>
                 <DropdownMenuSeparator />
@@ -42,6 +46,7 @@ export const Header = () => {
             )}
           </DropdownMenuContent>
         </DropdownMenu>
+        <Button onClick={() => router.push("/new")}>Create room</Button>
       </div>
     </header>
   );
