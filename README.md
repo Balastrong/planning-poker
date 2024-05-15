@@ -15,6 +15,8 @@
 - [x] Create room
 - [x] Join room
 - [x] Kick/Leave from room
+- [x] Supabase Anon Auth
+- [ ] Edit username
 - [ ] Decent UI already?
 - [ ] Custom cards (fibonacci, t-shirt, etc)
 - [ ] External Auth (?)

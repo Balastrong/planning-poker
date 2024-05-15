@@ -1,12 +1,25 @@
 import { supabase } from "@/lib/supabase";
 
-const me = async ({ id }: { id: string }) =>
-  supabase.from("users").select().eq("id", id);
+const getUser = () => supabase.auth.getUser();
 
-const guestSignIn = ({ id, username }: { id?: string; username: string }) =>
-  supabase.from("users").upsert({ username, id }).select();
+const upsertAnonymousUser = async (username: string) => {
+  const { data } = await getUser();
+
+  if (!data.user) {
+    await supabase.auth.signInAnonymously({
+      options: {
+        data: { username },
+      },
+    });
+    return;
+  }
+
+  await supabase.auth.updateUser({
+    data: { username },
+  });
+};
 
 export const usersClient = {
-  me,
-  guestSignIn,
+  getUser,
+  upsertAnonymousUser,
 };

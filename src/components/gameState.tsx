@@ -13,15 +13,17 @@ export const GameStateDisplay = ({
 
   return (
     <div className="flex gap-4">
-      {gameState?.votes.map((vote) => (
-        <VoteCard
-          key={vote.id}
-          vote={vote}
-          showVotes={gameState.showVotes || false}
-          isCurrent={currentUser?.id === vote.users?.id}
-          onLeave={() => onLeave(vote.users!.id)}
-        />
-      ))}
+      {gameState?.votes
+        .filter((vote) => !!vote.profiles)
+        .map((vote) => (
+          <VoteCard
+            key={vote.id}
+            vote={vote}
+            showVotes={gameState.showVotes || false}
+            isCurrent={currentUser?.id === vote.profiles!.id}
+            onLeave={() => onLeave(vote.profiles!.id)}
+          />
+        ))}
     </div>
   );
 };

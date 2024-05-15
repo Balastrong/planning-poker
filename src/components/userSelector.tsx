@@ -1,19 +1,26 @@
 "use client";
 
-import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { usersClient } from "@/db/users";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { useEffect, useState } from "react";
+import { User } from "@supabase/supabase-js";
 
 export const UserSelector = () => {
-  const { currentUser, saveUser } = useCurrentUser();
+  const [currentUser, setCurrentUser] = useState<User | null>();
 
-  const handleSaveUser = (e: React.FormEvent) => {
+  useEffect(() => {
+    usersClient.getUser().then(({ data }) => setCurrentUser(data.user));
+  }, []);
+
+  const handleSaveUser = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
     const username = formData.get("username") as string;
 
-    saveUser(username);
+    await usersClient.upsertAnonymousUser(username);
+    setCurrentUser((await usersClient.getUser()).data.user);
   };
 
   return (
@@ -25,7 +32,7 @@ export const UserSelector = () => {
       </form>
       <div className="mt-2 text-sm text-gray-500">
         {currentUser?.id
-          ? `Logged in as ${currentUser?.username}`
+          ? `Logged in as ${currentUser.user_metadata.username}`
           : "Please enter your name"}
       </div>
     </div>

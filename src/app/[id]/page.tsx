@@ -15,7 +15,7 @@ export default function GamePage({
   useEffect(() => {
     if (!currentUser) return;
 
-    roomsClient.joinRoom(id, currentUser.id);
+    roomsClient.joinRoom(id);
   }, [currentUser, id]);
 
   return (

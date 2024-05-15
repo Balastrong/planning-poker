@@ -1,4 +1,4 @@
-import { GameVote } from "@/db/votes";
+import { GameState } from "@/db/rooms";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 
@@ -8,7 +8,7 @@ export const VoteCard = ({
   showVotes,
   onLeave,
 }: {
-  vote: GameVote;
+  vote: GameState["votes"][number];
   isCurrent: boolean;
   showVotes: boolean;
   onLeave: () => void;
@@ -19,7 +19,7 @@ export const VoteCard = ({
         {showVotes ? vote?.vote ?? "-" : vote?.vote ? "👀" : "🤔"}
       </div>
       <span className={cn(isCurrent && "font-bold")}>
-        {vote.users?.username}
+        {vote.profiles?.username}
       </span>
       <X onClick={onLeave} className="cursor-pointer text-destructive" />
     </div>

@@ -16,7 +16,6 @@ export const useGameState = (roomId: string, userId: string | undefined) => {
     votesClient.castVote({
       vote: vote.toString(),
       room: roomId,
-      user: userId,
     });
   };
 
@@ -36,8 +35,8 @@ export const useGameState = (roomId: string, userId: string | undefined) => {
   const hideVotes = async () =>
     roomsClient.toggleVotesVisibility(roomId, false);
 
-  const leaveRoom = async (userId: string) => {
-    await roomsClient.leaveRoom(roomId, userId);
+  const leaveRoom = async () => {
+    await roomsClient.leaveRoom(roomId);
   };
 
   return {
