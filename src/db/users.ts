@@ -14,9 +14,7 @@ const upsertAnonymousUser = async (username: string) => {
     return;
   }
 
-  await supabase.auth.updateUser({
-    data: { username },
-  });
+  await supabase.from("profiles").update({ username }).eq("id", data.user.id);
 };
 
 export const usersClient = {

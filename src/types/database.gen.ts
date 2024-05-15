@@ -22,7 +22,15 @@ export type Database = {
           id?: string
           username?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       rooms: {
         Row: {
@@ -45,28 +53,12 @@ export type Database = {
         }
         Relationships: []
       }
-      tests: {
-        Row: {
-          created_at: string
-          id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-        }
-        Relationships: []
-      }
       votes: {
         Row: {
           created_at: string
           id: number
           profile: string
           room: string
-          test: string | null
           vote: string | null
         }
         Insert: {
@@ -74,7 +66,6 @@ export type Database = {
           id?: number
           profile?: string
           room: string
-          test?: string | null
           vote?: string | null
         }
         Update: {
@@ -82,7 +73,6 @@ export type Database = {
           id?: number
           profile?: string
           room?: string
-          test?: string | null
           vote?: string | null
         }
         Relationships: [
@@ -98,13 +88,6 @@ export type Database = {
             columns: ["room"]
             isOneToOne: false
             referencedRelation: "rooms"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "votes_test_fkey"
-            columns: ["test"]
-            isOneToOne: false
-            referencedRelation: "tests"
             referencedColumns: ["id"]
           },
         ]
