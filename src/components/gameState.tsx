@@ -4,10 +4,10 @@ import { VoteCard } from "./voteCard";
 
 export const GameStateDisplay = ({
   gameState,
-  onLeave,
+  onKick,
 }: {
   gameState: GameState | undefined;
-  onLeave: (userId: string) => void;
+  onKick: (userId: string) => void;
 }) => {
   const { currentUser } = useCurrentUser();
 
@@ -21,7 +21,7 @@ export const GameStateDisplay = ({
             vote={vote}
             showVotes={gameState.showVotes || false}
             isCurrent={currentUser?.id === vote.profiles!.id}
-            onLeave={() => onLeave(vote.profiles!.id)}
+            onKick={() => onKick(vote.profiles!.id)}
           />
         ))}
     </div>

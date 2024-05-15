@@ -39,6 +39,10 @@ export const useGameState = (roomId: string, userId: string | undefined) => {
     await roomsClient.leaveRoom(roomId);
   };
 
+  const kickUser = async (userId: string) => {
+    await roomsClient.kickUser(roomId, userId);
+  };
+
   return {
     gameState,
     refetchGameState,
@@ -46,6 +50,7 @@ export const useGameState = (roomId: string, userId: string | undefined) => {
     resetGame,
     showVotes,
     hideVotes,
+    kickUser,
     leaveRoom,
   };
 };

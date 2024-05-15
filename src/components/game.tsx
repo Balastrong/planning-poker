@@ -15,7 +15,7 @@ export const Game = ({ roomId }: { roomId: string }) => {
     sendVote,
     resetGame,
     showVotes,
-    leaveRoom,
+    kickUser,
   } = useGameState(roomId, currentUser?.id);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export const Game = ({ roomId }: { roomId: string }) => {
         onShowVotes={showVotes}
         disableVotes={!currentUser?.id || gameState?.showVotes || false}
       />
-      <GameStateDisplay gameState={gameState} onLeave={leaveRoom} />
+      <GameStateDisplay gameState={gameState} onKick={kickUser} />
     </div>
   );
 };

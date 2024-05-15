@@ -6,12 +6,12 @@ export const VoteCard = ({
   vote,
   isCurrent,
   showVotes,
-  onLeave,
+  onKick: onLeave,
 }: {
   vote: GameState["votes"][number];
   isCurrent: boolean;
   showVotes: boolean;
-  onLeave: () => void;
+  onKick: () => void;
 }) => {
   return (
     <div className="flex flex-col items-center gap-2">

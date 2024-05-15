@@ -1,16 +1,51 @@
 import { usersClient } from "@/db/users";
-import { supabase } from "@/lib/supabase";
-import { useQuery } from "@tanstack/react-query";
+import { Tables } from "@/types/database.gen";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useCurrentUser = () => {
-  supabase.auth.getSession();
+type UseCurrentUser = {
+  saveUser: (username: string) => Promise<void>;
+  logOut: () => Promise<void>;
+} & (
+  | {
+      isAuthenticated: true;
+      currentUser: Tables<"profiles">;
+    }
+  | {
+      isAuthenticated: false;
+      currentUser?: never;
+    }
+);
+
+export const useCurrentUser = (): UseCurrentUser => {
+  const queryClient = useQueryClient();
   const { data: currentUser } = useQuery({
-    queryFn: () => usersClient.getUser(),
+    queryFn: () => usersClient.getProfile(),
     queryKey: ["currentUser"],
-    select: ({ data }) => data.user,
+    select: (res) => res?.data || undefined,
   });
 
+  const saveUser = async (username: string) => {
+    await usersClient.upsertAnonymousUser(username);
+    queryClient.invalidateQueries({ queryKey: ["currentUser"] });
+  };
+
+  const logOut = async () => {
+    await usersClient.logOut();
+    queryClient.invalidateQueries({ queryKey: ["currentUser"] });
+  };
+
+  if (!!currentUser) {
+    return {
+      isAuthenticated: true,
+      currentUser,
+      saveUser,
+      logOut,
+    };
+  }
+
   return {
-    currentUser,
+    isAuthenticated: false,
+    saveUser,
+    logOut,
   };
 };

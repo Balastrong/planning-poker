@@ -37,6 +37,9 @@ const joinRoom = async (roomId: string) =>
 const leaveRoom = async (roomId: string) =>
   supabase.from("votes").delete().eq("room", roomId);
 
+const kickUser = async (roomId: string, userId: string) =>
+  supabase.from("votes").delete().eq("room", roomId).eq("profile", userId);
+
 export const roomsClient = {
   getJoinedRooms,
   getState,
@@ -44,4 +47,5 @@ export const roomsClient = {
   createRoom,
   joinRoom,
   leaveRoom,
+  kickUser,
 };
